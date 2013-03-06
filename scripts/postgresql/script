@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source ./.build_env
+
+./configure --prefix=$TARGET_DIR --with-libedit-preferred --with-libxml --with-libxslt --with-openssl --with-ldap
+make
+rm -rf $TARGET_DIR/bin/*
+rm -rf $TARGET_DIR/lib/*.a
+rm -rf $TARGET_DIR/lib/*.la
+rm -rf $TARGET_DIR/ssl
+rm -rf $TARGET_DIR/etc/*
+rm -rf $TARGET_DIR/share/aclocal
+rm -rf $TARGET_DIR/gtk-doc
+rm -rf $TARGET_DIR/man
+rm -rf $TARGET_DIR/doc
+make install
