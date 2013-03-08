@@ -76,10 +76,16 @@
    done
  popd
 
- cd $BASE_DIR/dist
- tar czvf $DIST_NAME.tar.gz $DIST_NAME 1>>$BUILD_LOG 2>&1
- handle_error
- rm -rf $DIST_NAME
+ pushd $DIST_DIR
+   tar czvf $DIST_NAME.tar.gz * 1>>$BUILD_LOG 2>&1
+   handle_error
+   mkdir -p $BASE_DIR/release
+   if [ -e $BASE_DIR/release/$DIST_NAME.tar.gz ];
+   then
+     rm -rf $BASE_DIR/release/$DIST_NAME.tar.gz
+   fi
+   cp $DIST_NAME.tar.gz $BASE_DIR/release
+ popd
+ rm -rf $DIST_DIR
  rm -rf tmp
 
- 
